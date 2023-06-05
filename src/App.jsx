@@ -32,7 +32,8 @@ const [interruptor, setinterruptor] = useState(false);
 
 
   const [colaboradorSCL, setColaboradorSCL] = useState({
-    nombre: '(Nombre y Apellidos) ',
+    nombre: '(Nombre) ',
+    apellido: '(Apellido)',
     puesto:'(Aquí va el puesto del colaboraddor)',
     pais: '(Agrega el pais)',
     ciudad: 'Solo aplica en MX y COL',
@@ -49,7 +50,8 @@ const [interruptor, setinterruptor] = useState(false);
   });
 
   const [colaboradorItus, setColaboradorItus] = useState({
-    nombre: '(Nombre y Apellidos)',
+    nombre: '(Nombre)',
+    apellido: '(Apellido)',
     puesto:'(Aquí va el puesto del colaboraddor)',
     pais: '(Agrega el pais)',
     ciudad: 'Solo aplica en MX y COL',
@@ -57,7 +59,7 @@ const [interruptor, setinterruptor] = useState(false);
     clave:' clave internacional telefonica',
     lada:' clave lada por estados cdmx',
     ext:'0000',
-    mobile:'000000',
+    mobile:'00000000',
     skype:'',
     whatsapp:false,
     correo:'(Ingresa correo:)'
@@ -65,9 +67,15 @@ const [interruptor, setinterruptor] = useState(false);
 
   });
 
-
-
-
+  //Logica formato Telefono://
+  function separarPorLaMitad(str) {
+    let mitad = Math.floor(str.length / 2);
+    let primeraMitad = str.slice(0, mitad);
+    let segundaMitad = str.slice(mitad);
+  
+    return primeraMitad + " " + segundaMitad;
+  }
+  
 
 
 
@@ -76,7 +84,7 @@ const [interruptor, setinterruptor] = useState(false);
 
   
 
-  const htmlCode = `<BODY style="font-size: 10pt; font-family: Tahoma, sans-serif"><table style="width: 430px; font-size: 10pt; font-family: Arial, sans-serif;" cellpadding="0" cellspacing="0"><tbody><tr></tr><tr><td style="margin-bottom: 10px;"><a href="http://www.seacargo.com/" target="_blank" rel="noopener"><img border="0" alt="línea" width="430" style="width:430px; height:2px; border:0; margin-bottom:5px; padding-top: 10px;" src="http://www.seacargo.com/LineaAzul.png"></a> </td></tr><tr><td style="font-size: 14pt; font-family: Tahoma; width: 511px; padding-bottom: 10px; vertical-align:top;margin-bottom: 10px; font-weight: 400;" valign="top"><span style="font-family: Helvetica; font-size: 9pt; color:#878787; font-weight: 500;"><span style="font-weight: 600; color:#0043F6;"> ${colaboradorSCL.nombre}</span> | <span style="color:red;"><strong>${colaboradorSCL.puesto}</strong></span> | ${colaboradorSCL.pais}, ${colaboradorSCL.ciudad} |<br>Phone: +${Ci[colaboradorSCL.clave]} ${colaboradorSCL.phone} ext: ${colaboradorSCL.ext} | Mobile: +${Ci[colaboradorSCL.clave]} (${ladamx[colaboradorSCL.lada]}) ${colaboradorSCL.mobile} ${colaboradorSCL.whatsapp ? `| <a href="https://wa.me/${Ci[colaboradorSCL.clave]}${ladamx[colaboradorSCL.lada]}${colaboradorSCL.mobile}" target="_blank">WhatsApp</a>` : '' } <br>Skype: ${colaboradorSCL.skype} | E-mail: <a href="mailto:${colaboradorSCL.correo}">${colaboradorSCL.correo}</span></td></tr><tr style="margin-bottom: 10px;"> <td style="margin-bottom: 10px;"><a href="http://www.seacargo.com/" target="_blank" rel="noopener"><img border="0" alt="logo" width="130" style="width:130px; height:71px; border:0; margin-bottom:5px; padding-top: 10px;" src="https://www.seacargo.com/Logo.png"></a></td></tr></tbody> </table></BODY>`;
+  const htmlCode = `<BODY style="font-size: 10pt; font-family: Tahoma, sans-serif"><table style="width: 430px; font-size: 10pt; font-family: Arial, sans-serif;" cellpadding="0" cellspacing="0"><tbody><tr></tr><tr><td style="margin-bottom: 10px;"><a href="http://www.seacargo.com/" target="_blank" rel="noopener"><img border="0" alt="línea" width="430" style="width:430px; height:2px; border:0; margin-bottom:5px; padding-top: 10px;" src="http://www.seacargo.com/LineaAzul.png"></a> </td></tr><tr><td style="font-size: 14pt; font-family: Tahoma; width: 511px; padding-bottom: 10px; vertical-align:top;margin-bottom: 10px; font-weight: 400;" valign="top"><span style="font-family: Helvetica; font-size: 9pt; color:#878787; font-weight: 500;"><span style="font-weight: 600; color:#0043F6;"> ${colaboradorSCL.nombre} ${colaboradorSCL.apellido.toUpperCase()}</span> | <span style="color:red;"><strong>${colaboradorSCL.puesto}</strong></span> | ${colaboradorSCL.pais}, ${colaboradorSCL.ciudad} |<br>Phone: +${Ci[colaboradorSCL.clave]}  ${separarPorLaMitad(colaboradorSCL.phone)} ext: ${colaboradorSCL.ext} | Mobile: +${Ci[colaboradorSCL.clave]} (${ladamx[colaboradorSCL.lada]}) ${separarPorLaMitad(colaboradorSCL.mobile)} ${colaboradorSCL.whatsapp ? `| <a  style=" text-decoration:none; color:#878787;" href="https://wa.me/${Ci[colaboradorSCL.clave]}${ladamx[colaboradorSCL.lada]}${colaboradorSCL.mobile}" target="_blank">WhatsApp</a>` : '' } <br>Skype: ${colaboradorSCL.skype} | E-mail: <a style=" text-decoration:none; color:#878787;" href="mailto:${colaboradorSCL.correo}">${colaboradorSCL.correo}</span></td></tr><tr style="margin-bottom: 10px;"> <td style="margin-bottom: 10px;"><a href="http://www.seacargo.com/" target="_blank" rel="noopener"><img border="0" alt="logo" width="130" style="width:130px; height:71px; border:0; margin-bottom:5px; padding-top: 10px;" src="https://seacargo.com/wp-content/uploads/2023/05/Logo_firmas.png"></a></td></tr></tbody> </table></BODY>`;
 
 
 
@@ -189,8 +197,21 @@ const [interruptor, setinterruptor] = useState(false);
           />
           
         </label>
-        <br/>
         <label>
+          Apellido:
+          
+          <input
+            type="text"
+            name="apellido"
+            value={colaboradorSCL.apellido}
+            onChange={handleInputChange}
+          />
+          
+        </label>
+        
+     
+    </div>
+    <label>
           Puesto:
           <input
             type="text"
@@ -199,7 +220,6 @@ const [interruptor, setinterruptor] = useState(false);
             onChange={handleInputChange}
           />
           </label>
-    </div>
 
     <div className='col2'>
           <label>
