@@ -173,6 +173,7 @@ const [interruptor, setinterruptor] = useState(false);
   return (
 
 <div>
+
 <Navbar setinterruptor={setinterruptor} interruptor={interruptor}/>
 
   {!interruptor ?

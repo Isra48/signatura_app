@@ -1,3 +1,19 @@
+@media only screen and (max-width: 1300px) {
+  .container{
+    display: none;
+
+  }
+  .Navbar_Container{
+    display: none;
+  }
+  .editor_container{
+    display: none;
+
+  }
+
+    
+}
+
 /* estos son lo estilos del contenedor del formulario */
 .container {
     display: flex;
